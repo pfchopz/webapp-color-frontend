@@ -74,7 +74,7 @@ if __name__ == "__main__":
     BACKEND_SERVER_IP = os.environ.get('BACKEND_SERVER_IP')
     response = requests.get(f"http://{BACKEND_SERVER_IP}:8000/message")
     data = response.json()
-    CONTENT = f"Backend API Server responded with: { data['message'] }"
+    CONTENT = f"Database Message: {data}"
 
     # Run Flask Application
     app.run(host="0.0.0.0", port=8080)
