@@ -17,6 +17,10 @@ color_codes = {
     "darkblue": "#130f40"
 }
 
+# Arbitrary version number
+VERSION = "Version 1"
+
+# Supported Colors Variable
 SUPPORTED_COLORS = ",".join(color_codes.keys())
 
 # Get color from Environment variable
@@ -30,7 +34,7 @@ CONTENT =  "Default Content"
 @app.route("/")
 def main():
     # return 'Hello'
-    return render_template('hello.html', name=socket.gethostname(), color=color_codes[COLOR], data=CONTENT)
+    return render_template('hello.html', name=socket.gethostname(), color=color_codes[COLOR], data=CONTENT, version=VERSION)
 
 
 if __name__ == "__main__":
@@ -67,11 +71,10 @@ if __name__ == "__main__":
         exit(1)
 
     # Get data from backend API
-    response = requests.get('http://localhost:8000/message')
+    BACKEND_SERVER_IP = os.environ.get('BACKEND_SERVER_IP')
+    response = requests.get(f"http://{BACKEND_SERVER_IP}:8000/message")
     data = response.json()
     CONTENT = f"Backend API Server responded with: { data['message'] }"
-
-    print(f"Backend API Server responded with: { data['message'] }")
 
     # Run Flask Application
     app.run(host="0.0.0.0", port=8080)
