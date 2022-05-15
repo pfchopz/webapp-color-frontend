@@ -4,6 +4,7 @@ import socket
 import random
 import os
 import argparse
+import requests
 
 app = Flask(__name__)
 
@@ -23,11 +24,13 @@ COLOR_FROM_ENV = os.environ.get('APP_COLOR')
 # Generate a random color
 COLOR = random.choice(["red", "green", "blue", "blue2", "darkblue", "pink"])
 
+CONTENT =  "Default Content"
+
 
 @app.route("/")
 def main():
     # return 'Hello'
-    return render_template('hello.html', name=socket.gethostname(), color=color_codes[COLOR])
+    return render_template('hello.html', name=socket.gethostname(), color=color_codes[COLOR], data=CONTENT)
 
 
 if __name__ == "__main__":
@@ -62,6 +65,13 @@ if __name__ == "__main__":
     if COLOR not in color_codes:
         print("Color not supported. Received '" + COLOR + "' expected one of " + SUPPORTED_COLORS)
         exit(1)
+
+    # Get data from backend API
+    response = requests.get('http://localhost:8000/message')
+    data = response.json()
+    CONTENT = f"Backend API Server responded with: { data['message'] }"
+
+    print(f"Backend API Server responded with: { data['message'] }")
 
     # Run Flask Application
     app.run(host="0.0.0.0", port=8080)
