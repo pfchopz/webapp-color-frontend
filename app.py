@@ -71,8 +71,8 @@ if __name__ == "__main__":
         exit(1)
 
     # Get data from backend API
-    BACKEND_SERVER_IP = os.environ.get('BACKEND_SERVER_IP')
-    response = requests.get(f"http://{BACKEND_SERVER_IP}:8000/message")
+    BACKEND_SERVER = os.environ.get('BACKEND_SERVER')
+    response = requests.get(f"http://{BACKEND_SERVER}:8000/message")
     data = response.json()
     CONTENT = f"Database Message: {data}"
 
