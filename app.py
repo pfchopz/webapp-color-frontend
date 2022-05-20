@@ -18,7 +18,7 @@ color_codes = {
 }
 
 # Arbitrary version number
-VERSION = "Version 4"
+VERSION = "Version 1"
 
 # Supported Colors Variable
 SUPPORTED_COLORS = ",".join(color_codes.keys())
@@ -26,7 +26,7 @@ SUPPORTED_COLORS = ",".join(color_codes.keys())
 # Get color from Environment variable
 COLOR_FROM_ENV = os.environ.get('APP_COLOR')
 # Generate a random color
-COLOR = random.choice(["red", "green", "blue", "blue2", "darkblue", "pink"])
+COLOR = "blue"
 
 CONTENT =  "Default Content"
 
@@ -34,7 +34,7 @@ CONTENT =  "Default Content"
 @app.route("/")
 def main():
     # return 'Hello'
-    return render_template('hello.html', name=socket.gethostname(), color=color_codes[COLOR], data=CONTENT, version=VERSION)
+    return render_template('hello.html', name=socket.gethostname(), color=color_codes[COLOR], data=CONTENT)
 
 
 if __name__ == "__main__":
