@@ -18,7 +18,7 @@ color_codes = {
 }
 
 # Arbitrary version number
-VERSION = "Version 3"
+VERSION = "Version 4"
 
 # Supported Colors Variable
 SUPPORTED_COLORS = ",".join(color_codes.keys())
